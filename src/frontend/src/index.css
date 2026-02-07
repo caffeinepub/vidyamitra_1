@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 0.625rem;
+        --background: 0.99 0.01 280;
+        --foreground: 0.145 0.02 280;
+        --card: 1 0 0;
+        --card-foreground: 0.145 0.02 280;
+        --popover: 1 0 0;
+        --popover-foreground: 0.145 0.02 280;
+        --primary: 0.55 0.18 280;
+        --primary-foreground: 0.99 0.01 280;
+        --secondary: 0.92 0.03 280;
+        --secondary-foreground: 0.25 0.05 280;
+        --muted: 0.95 0.02 280;
+        --muted-foreground: 0.50 0.03 280;
+        --accent: 0.92 0.03 280;
+        --accent-foreground: 0.25 0.05 280;
+        --destructive: 0.577 0.245 27.325;
+        --destructive-foreground: 0.985 0 0;
+        --border: 0.90 0.02 280;
+        --input: 0.90 0.02 280;
+        --ring: 0.55 0.18 280;
+        --chart-1: 0.55 0.18 280;
+        --chart-2: 0.60 0.15 260;
+        --chart-3: 0.65 0.12 300;
+        --chart-4: 0.50 0.20 270;
+        --chart-5: 0.58 0.16 290;
+    }
+
+    .dark {
+        --background: 0.145 0.02 280;
+        --foreground: 0.985 0.01 280;
+        --card: 0.20 0.03 280;
+        --card-foreground: 0.985 0.01 280;
+        --popover: 0.20 0.03 280;
+        --popover-foreground: 0.985 0.01 280;
+        --primary: 0.65 0.20 280;
+        --primary-foreground: 0.145 0.02 280;
+        --secondary: 0.25 0.05 280;
+        --secondary-foreground: 0.985 0.01 280;
+        --muted: 0.25 0.05 280;
+        --muted-foreground: 0.65 0.05 280;
+        --accent: 0.30 0.08 280;
+        --accent-foreground: 0.985 0.01 280;
+        --destructive: 0.704 0.191 22.216;
+        --destructive-foreground: 0.145 0.02 280;
+        --border: 0.30 0.05 280;
+        --input: 0.30 0.05 280;
+        --ring: 0.60 0.18 280;
+        --chart-1: 0.65 0.20 280;
+        --chart-2: 0.60 0.18 260;
+        --chart-3: 0.70 0.15 300;
+        --chart-4: 0.55 0.22 270;
+        --chart-5: 0.62 0.19 290;
+    }
+
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+}
+
+@layer utilities {
+    .bg-grid-pattern {
+        background-image: linear-gradient(to right, oklch(var(--border)) 1px, transparent 1px),
+            linear-gradient(to bottom, oklch(var(--border)) 1px, transparent 1px);
+        background-size: 24px 24px;
+    }
+}

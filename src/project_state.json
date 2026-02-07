@@ -1,0 +1,215 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 5,
+  "summary": "Build VidyaMitra, an AI-powered career mentor web app with a React (Vite + Tailwind) frontend and FastAPI backend, using AI agents to deliver resume evaluation, skill-gap analysis, mock interviews (text/voice), quizzes, progress tracking, job role selection, eligibility checks, and personalized 4-week learning plans; integrates OpenAI GPT-4, YouTube/Google resources, Supabase storage/auth/real-time, Pexels visuals, with optional News/Exchange APIs; modern purple animated UI and a specified monorepo folder structure.",
+  "architectural_notes": [
+    "Frontend: React + Vite + Tailwind CSS (web/), using lucide-react icons and framer-motion for subtle animations; modern purple gradient theme.",
+    "Backend: FastAPI (backend/app) with CORS and modular routers: resume, evaluate, plan, quiz, interview, progress; separate services layer for AI/Supabase/etc.",
+    "Data/Auth layer: Supabase for authentication, storage, and real-time sync of user/profile/progress data.",
+    "AI/Agents architecture: React UI -> AI agent modules -> FastAPI APIs -> Supabase; GPT-4 used for resume analysis, plans, and interview feedback.",
+    "External APIs: YouTube/Google for learning resources, Pexels for visual learning resources; optional News/Exchange APIs.",
+    "Local dev: run backend (uvicorn app.main:app --reload) on :8000 and frontend (npm run dev) on :5173 in separate terminals; Python 3.10+ and Node 18+.",
+    "Repo structure must match specified vidyamitra/ backend/ and web/ layout; include .env and .env.example with placeholders.",
+    "App UX: gate the entire app behind authentication (Sign In/Sign Up first) and protect all feature routes; persist user session and load user-specific data for each module."
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-align-the-project-to-the-internet-computer-template-constraints-by-implementing-vidyamitra-using-the-existing-react-vite-frontend-and-single-actor-motoko-backend-instead-of-fastapi-while-preserving-the-product-scope-resume-evaluation-skill-gap-mapping-mock-interview-text-voice-ui-4-week-learning-plan-quizzes-progress-tracking-job-role-selection-and-eligibility-check",
+      "title": "Align the project to the Internet Computer template constraints by implementing VidyaMitra using the existing React (Vite) frontend and single-actor Motoko backend (instead of FastAPI), while preserving the product scope: resume evaluation, skill-gap mapping, mock interview (text/voice UI), 4-week learning plan, quizzes, progress tracking, job role selection, and eligibility check.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-milestone-1-provide-environment-setup-documentation-and-commands-for-local-development-on-the-internet-computer-template-including-installing-prerequisites-installing-dependencies-starting-the-local-replica-deploying-canisters-and-running-the-frontend-dev-server-include-the-local-urls-ports-used-by-this-template",
+      "title": "Milestone 1: Provide environment setup documentation and commands for local development on the Internet Computer template, including installing prerequisites, installing dependencies, starting the local replica, deploying canisters, and running the frontend dev server; include the local URLs/ports used by this template.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-frontend-route-page-scaffold-for-the-vidyamitra-user-flow-login-register-home-dashboard-resume-upload-analysis-domain-selection-job-role-selection-eligibility-check-learning-plan-4-week-quiz-interview-text-voice-toggle-ui-progress-implement-navigation-between-pages-with-a-consistent-layout-shell",
+      "title": "Create a frontend route/page scaffold for the VidyaMitra user flow: Login, Register, Home, Dashboard, Resume Upload, Analysis, Domain Selection, Job Role Selection, Eligibility Check, Learning Plan (4-week), Quiz, Interview (Text/Voice toggle UI), Progress; implement navigation between pages with a consistent layout shell.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-resume-upload-page-to-accept-a-file-pdf-docx-and-upload-it-to-the-backend-as-bytes-for-storage-show-a-success-state-and-display-basic-extracted-metadata-filename-size-and-a-placeholder-parsed-text-sections-output-until-ai-integrations-are-available",
+      "title": "Implement the Resume Upload page to accept a file (PDF/DOCX) and upload it to the backend as bytes for storage; show a success state and display basic extracted metadata (filename, size) and a placeholder parsed text/sections output until AI integrations are available.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-analysis-page-ui-to-present-overall-profile-score-percentage-skill-tags-chips-strengths-vs-gaps-strengths-section-recommendations-section-and-an-ats-score-checker-0-100-computed-locally-or-via-backend-placeholder-logic-keyword-match-against-a-configurable-list-until-real-ai-evaluation-is-available",
+      "title": "Implement the Analysis page UI to present: overall profile score percentage, skill tags/chips (strengths vs gaps), strengths section, recommendations section, and an ATS Score Checker (0–100) computed locally or via backend placeholder logic (keyword match against a configurable list) until real AI evaluation is available.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-job-role-selection-and-eligibility-check-pages-allow-choosing-a-domain-and-job-role-from-a-list-with-search-filter-and-a-custom-job-role-option-compute-and-display-an-eligibility-result-pass-fail-areas-to-improve-based-on-resume-analysis-placeholders",
+      "title": "Implement the Job Role Selection and Eligibility Check pages: allow choosing a domain and job role from a list with search/filter and a custom job role option; compute and display an eligibility result (pass/fail + areas to improve) based on resume/analysis placeholders.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-4-week-learning-plan-page-ui-show-week-1-4-cards-with-tasks-checklists-and-resource-links-include-a-mechanism-to-attach-youtube-links-as-resources-manual-entry-for-now-and-track-completion-locally-and-in-backend-progress",
+      "title": "Implement the 4-week Learning Plan page UI: show Week 1–4 cards with tasks/checklists and resource links; include a mechanism to attach YouTube links as resources (manual entry for now) and track completion locally and in backend progress.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-quiz-page-ui-select-domain-difficulty-and-number-of-questions-render-a-question-by-question-layout-with-choices-progress-indicator-submit-action-and-a-results-summary-use-backend-placeholder-quiz-generation-scoring",
+      "title": "Implement the Quiz page UI: select domain, difficulty, and number of questions; render a question-by-question layout with choices, progress indicator, submit action, and a results summary; use backend placeholder quiz generation/scoring.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-interview-page-with-a-text-voice-toggle-ui-text-mode-collects-typed-answers-voice-mode-uses-the-browser-web-speech-api-to-capture-speech-to-text-shows-a-real-time-mic-animation-and-sends-transcript-to-backend-placeholder-feedback-include-a-confidence-score-placeholder-and-feedback-cards",
+      "title": "Implement the Interview page with a Text/Voice toggle UI: Text mode collects typed answers; Voice mode uses the browser Web Speech API to capture speech-to-text, shows a real-time mic animation, and sends transcript to backend placeholder feedback; include a confidence score placeholder and feedback cards.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-progress-page-to-display-user-history-and-analytics-quiz-history-interview-summaries-and-learning-plan-completion-fetch-from-backend-and-render-in-responsive-cards-with-clear-empty-states",
+      "title": "Implement the Progress page to display user history and analytics: quiz history, interview summaries, and learning plan completion; fetch from backend and render in responsive cards with clear empty states.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-cover-letter-generator-ui-on-analysis-and-or-job-role-selection-generate-a-cover-letter-from-stored-resume-content-selected-job-role-using-deterministic-templates-placeholder-logic-provide-preview-and-client-side-pdf-download-no-external-ai-calls",
+      "title": "Implement a Cover Letter Generator UI on Analysis and/or Job Role Selection: generate a cover letter from stored resume content + selected job role using deterministic templates/placeholder logic; provide preview and client-side PDF download (no external AI calls).",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-the-requested-ui-style-consistently-across-the-app-modern-purple-gradient-theme-responsive-cards-subtle-animations-and-lucide-react-icons-include-animated-loading-states-e-g-rocket-launch-motif-without-heavy-effects",
+      "title": "Apply the requested UI style consistently across the app: modern purple gradient theme, responsive cards, subtle animations, and lucide-react icons; include animated loading states (e.g., rocket/launch motif) without heavy effects.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-enforce-a-sign-in-sign-up-first-start-experience-with-proper-authentication-gating-unauthenticated-users-must-be-redirected-to-the-login-flow-when-attempting-to-access-any-protected-module-dashboard-resume-analysis-domain-job-role-eligibility-learning-plan-quiz-interview-progress",
+      "title": "Enforce a Sign In / Sign Up first-start experience with proper authentication gating: unauthenticated users must be redirected to the Login flow when attempting to access any protected module (Dashboard, Resume, Analysis, Domain/Job Role/Eligibility, Learning Plan, Quiz, Interview, Progress).",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-register-sign-up-ux-to-work-correctly-with-internet-identity-provide-an-interactive-sign-up-path-that-initiates-internet-identity-instead-of-disabled-username-password-inputs-and-clearly-explains-that-registration-is-completed-via-internet-identity-on-first-login",
+      "title": "Update the Register (Sign Up) UX to work correctly with Internet Identity: provide an interactive sign-up path that initiates Internet Identity (instead of disabled username/password inputs) and clearly explains that registration is completed via Internet Identity on first login.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-modify-the-quiz-flow-so-it-begins-by-asking-the-user-how-many-questions-they-want-and-then-runs-a-quiz-with-exactly-that-many-questions-no-more-no-fewer-including-correct-progress-indicators-and-results-summary-based-on-that-count",
+      "title": "Modify the Quiz flow so it begins by asking the user how many questions they want, and then runs a quiz with exactly that many questions (no more, no fewer), including correct progress indicators and results summary based on that count.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-all-major-modules-function-end-to-end-without-dead-ends-users-can-complete-the-primary-flow-auth-profile-setup-resume-upload-analysis-domain-selection-job-role-selection-eligibility-check-learning-plan-quiz-interview-progress-with-clear-ctas-robust-empty-states-and-no-runtime-errors-when-prerequisite-data-is-missing",
+      "title": "Ensure all major modules function end-to-end without dead-ends: users can complete the primary flow (auth → profile setup → resume upload → analysis → domain selection → job role selection → eligibility check → learning plan → quiz → interview → progress) with clear CTAs, robust empty states, and no runtime errors when prerequisite data is missing.",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Set up Milestone 1 environment + exact project folder structure (backend/app with routers & services; web/src pages) and local run commands/ports",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Implement FastAPI backend with secure auth endpoints and modular routers: /resume, /evaluate, /plan, /quiz, /interview, /progress (+ CORS and root health endpoint)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Integrate AI + external services: OpenAI GPT-4 for analysis/plans/interview feedback; YouTube/Google APIs for learning resources; Supabase for auth/storage/real-time; Pexels for visuals; optional News/Exchange APIs",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Build React frontend pages (Login, Dashboard, Resume upload, Analysis, JobSelection, Eligibility, LearningPlan, Quiz, Interview, Progress) with modern purple gradient UI, lucide-react icons, and subtle animations",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Testing & integration milestone: backend API validation, frontend functionality testing, and end-to-end backend–frontend integration tests",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Milestone 6 extra features: ATS score checker (0-100) on Analysis, cover letter generator with PDF download, and voice mock interview mode with Web Speech API + mic animation + confidence scoring",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Implement Motoko backend API methods (canister calls) that correspond to the requested modules: auth/session (via Internet Identity), resume submission & parsing placeholder, evaluation placeholder, learning plan generation placeholder, quiz generation & scoring placeholder, interview feedback placeholder, and progress storage/retrieval; persist user-specific data in stable structures.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "Ensure the app starts with Sign In/Sign Up (registration if new) and enforce proper authentication with protected routes across all modules",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Update Quiz flow to first ask/select the number of questions (plus other settings) and generate/render exactly that many questions accordingly",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-13",
+      "summary": "Complete end-to-end interactivity so all modules function properly (auth -> resume -> analysis -> job role/eligibility -> learning plan -> quiz -> interview -> progress) with real navigation, state persistence, and consistent UI",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "VidyaMitra",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

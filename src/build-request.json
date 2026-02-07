@@ -1,0 +1,97 @@
+{
+  "kind": "build_request",
+  "title": "Finalize authentication-gated interactive flow and configurable quiz length",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-14",
+      "text": "Enforce a Sign In / Sign Up first-start experience with proper authentication gating: unauthenticated users must be redirected to the Login flow when attempting to access any protected module (Dashboard, Resume, Analysis, Domain/Job Role/Eligibility, Learning Plan, Quiz, Interview, Progress).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "begin with the sign in or sign up if not register and proper authentication should be there"
+        ]
+      },
+      "acceptanceCriteria": [
+        "When not authenticated, navigating directly to any protected route (e.g., /dashboard, /quiz, /progress) redirects to /login and does not render protected content.",
+        "When authenticated, protected routes render inside the existing AppShell/AuthGate layout as they do today.",
+        "After successful Internet Identity login, users land on /dashboard (or, if no profile exists, the existing AuthGate profile setup is shown and then the user can proceed)."
+      ]
+    },
+    {
+      "id": "REQ-15",
+      "text": "Update the Register (Sign Up) UX to work correctly with Internet Identity: provide an interactive sign-up path that initiates Internet Identity (instead of disabled username/password inputs) and clearly explains that registration is completed via Internet Identity on first login.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "begin with the sign in or sign up if not register and proper authentication should be there"
+        ]
+      },
+      "acceptanceCriteria": [
+        "/register provides a working call-to-action that triggers Internet Identity authentication (same mechanism as Login).",
+        "After completing Internet Identity authentication from /register, the app proceeds through the same authenticated flow as /login (profile setup via AuthGate if needed, then dashboard).",
+        "All user-facing copy on /register is in English and does not imply username/password registration."
+      ]
+    },
+    {
+      "id": "REQ-16",
+      "text": "Modify the Quiz flow so it begins by asking the user how many questions they want, and then runs a quiz with exactly that many questions (no more, no fewer), including correct progress indicators and results summary based on that count.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "and the quiz should begin with asking how many questions and should give accordingly"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Before starting the quiz questions, the Quiz page shows a setup step that asks for the number of questions (with validation to prevent invalid values).",
+        "Starting the quiz generates/renders exactly the selected number of questions, and the UI reflects that count in “Question X of Y” and the progress bar calculation.",
+        "The results view shows scoring and review for exactly the same number of questions the user selected.",
+        "Saving quiz results still calls the backend via the existing saveQuizResults flow, and the Progress page reflects the new quiz attempt after completion."
+      ]
+    },
+    {
+      "id": "REQ-17",
+      "text": "Ensure all major modules function end-to-end without dead-ends: users can complete the primary flow (auth → profile setup → resume upload → analysis → domain selection → job role selection → eligibility check → learning plan → quiz → interview → progress) with clear CTAs, robust empty states, and no runtime errors when prerequisite data is missing.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "complete all the project",
+          "give the full interactive look to the project",
+          "all the modules should function properly"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Each page that depends on prior data (e.g., Analysis without a resume, Eligibility without a selected role) shows a clear English empty-state message and a button linking to the prerequisite step, instead of crashing or rendering broken UI.",
+        "All existing backend calls used by the pages are handled gracefully on errors (e.g., unauthorized traps, missing records) with a visible error state and recovery navigation.",
+        "Completing actions updates state consistently across the app (e.g., uploading a resume updates Dashboard/Analysis availability; completing quiz/interview updates Progress)."
+      ]
+    }
+  ],
+  "constraints": [
+    "Backend must remain a single Motoko actor in backend/main.mo; only add backend changes there and create backend/migration.mo only if stable state layout changes require it.",
+    "Do not edit files under frontend/src/components/ui or any paths listed as immutable (e.g., frontend/src/hooks/useInternetIdentity.ts(x), frontend/src/hooks/useActor.ts, frontend/src/main.tsx). Compose around them instead.",
+    "Authentication must use Internet Identity (no username/password auth).",
+    "Use English for all user-facing text."
+  ],
+  "nonGoals": [
+    "Integrating external AI services (OpenAI/Anthropic/etc.) or third-party auth providers beyond Internet Identity.",
+    "Adding new modules beyond the existing VidyaMitra scope; focus is on making current modules fully functional and interactive.",
+    "Adding external databases or non-Internet-Computer backend services."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

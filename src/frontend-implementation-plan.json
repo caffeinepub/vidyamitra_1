@@ -1,0 +1,137 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Authentication-gated routing, Internet Identity register UX, configurable quiz length, and end-to-end module resilience",
+  "requirements": [
+    {
+      "id": "REQ-14",
+      "summary": "Add strict authentication gating so unauthenticated users are redirected to /login for all protected modules, while authenticated users keep the existing AuthGate/AppShell flow and land on /dashboard after login.",
+      "acceptanceCriteria": [
+        "When not authenticated, navigating directly to any protected route (e.g., /dashboard, /quiz, /progress) redirects to /login and does not render protected content.",
+        "When authenticated, protected routes render inside the existing AppShell/AuthGate layout as they do today.",
+        "After successful Internet Identity login, users land on /dashboard (or, if no profile exists, the existing AuthGate profile setup is shown and then the user can proceed)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Implement route-level auth gating for all protected modules: detect unauthenticated access attempts to protected paths and redirect to /login before rendering protected content; ensure authenticated navigation continues to render within AuthGate + AppShell. Use the selected \"authorization\" component guidance for Internet Identity authentication state and cache-clearing behavior; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/lib/routes.ts",
+          "operation": "modify",
+          "description": "Ensure route metadata cleanly distinguishes public vs protected routes for gating checks (e.g., /dashboard, /resume, /analysis, /domain, /job-role, /eligibility, /learning-plan, /quiz, /interview, /progress are protected; /, /login, /register are public). Use this list as the source of truth for redirect logic. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-15",
+      "summary": "Replace the current Register UX with an interactive Internet Identity sign-up flow and clear English copy explaining that registration happens on first Internet Identity login.",
+      "acceptanceCriteria": [
+        "/register provides a working call-to-action that triggers Internet Identity authentication (same mechanism as Login).",
+        "After completing Internet Identity authentication from /register, the app proceeds through the same authenticated flow as /login (profile setup via AuthGate if needed, then dashboard).",
+        "All user-facing copy on /register is in English and does not imply username/password registration."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/RegisterPage.tsx",
+          "operation": "modify",
+          "description": "Update /register to remove/avoid username-password form behavior and instead provide a primary CTA that initiates Internet Identity login; if already authenticated, navigate to /dashboard; update all on-page copy to clearly explain that account creation is completed via Internet Identity on first login. Use the selected \"authorization\" component’s Internet Identity login/logout patterns; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/LoginPage.tsx",
+          "operation": "modify",
+          "description": "Align cross-navigation and messaging between /login and /register so both flows consistently use Internet Identity; ensure any user-facing text does not imply username/password authentication. Use the selected \"authorization\" component guidance; verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-16",
+      "summary": "Add a quiz setup step to choose a question count and run the quiz with exactly that many questions, ensuring progress and results match the selected count and results are saved via the existing saveQuizResults flow.",
+      "acceptanceCriteria": [
+        "Before starting the quiz questions, the Quiz page shows a setup step that asks for the number of questions (with validation to prevent invalid values).",
+        "Starting the quiz generates/renders exactly the selected number of questions, and the UI reflects that count in “Question X of Y” and the progress bar calculation.",
+        "The results view shows scoring and review for exactly the same number of questions the user selected.",
+        "Saving quiz results still calls the backend via the existing saveQuizResults flow, and the Progress page reflects the new quiz attempt after completion."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/QuizPage.tsx",
+          "operation": "modify",
+          "description": "Refactor the quiz into a multi-step flow: (1) setup step prompting for desired question count with validation, (2) active quiz rendering exactly that many questions with correct \"Question X of Y\" and progress bar math, (3) results summary and review based on the same selected count; preserve saving via the existing useSaveQuizResults flow and ensure state resets allow taking another quiz without full page reload. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/utils/quiz.ts",
+          "operation": "create",
+          "description": "Add a small utility to deterministically select/generate exactly N quiz questions from the available question pool (e.g., slice/shuffle with a stable seed), returning a list sized exactly to the user-selected count for consistent progress/results calculations. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/ProgressPage.tsx",
+          "operation": "modify",
+          "description": "Ensure the Progress UI displays quiz score and progress consistently using the saved quiz’s question count (and handles missing quiz gracefully), so a completed quiz attempt is reflected immediately after completion via existing query invalidation. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-17",
+      "summary": "Eliminate dead-ends across modules by adding robust empty states, prerequisite CTAs, and graceful error handling for missing data and backend failures throughout the main user flow.",
+      "acceptanceCriteria": [
+        "Each page that depends on prior data (e.g., Analysis without a resume, Eligibility without a selected role) shows a clear English empty-state message and a button linking to the prerequisite step, instead of crashing or rendering broken UI.",
+        "All existing backend calls used by the pages are handled gracefully on errors (e.g., unauthorized traps, missing records) with a visible error state and recovery navigation.",
+        "Completing actions updates state consistently across the app (e.g., uploading a resume updates Dashboard/Analysis availability; completing quiz/interview updates Progress)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/DashboardPage.tsx",
+          "operation": "modify",
+          "description": "Harden Dashboard data loading: wrap resume/progress/profile reads in visible loading/error states (using AsyncState where appropriate) and provide clear CTAs when prerequisite data is missing (e.g., prompt to upload resume before analysis/eligibility). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/AnalysisPage.tsx",
+          "operation": "modify",
+          "description": "Ensure Analysis never dead-ends: keep the existing resume-required empty state, add error handling for resume fetch failures, and align CTAs with the intended flow (resume upload → analysis → domain selection → job role → eligibility). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/DomainSelectionPage.tsx",
+          "operation": "modify",
+          "description": "Add resilience and clear navigation for the domain step: provide a clear CTA to proceed after selecting a domain and ensure the page remains functional even if prior data (like resume) is missing by showing guidance rather than failing. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/JobRoleSelectionPage.tsx",
+          "operation": "modify",
+          "description": "Add prerequisite guarding and empty-state UX: if no domain is selected, show a clear English message and CTA linking back to /domain; ensure navigation to eligibility is only offered when role selection is valid. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/EligibilityCheckPage.tsx",
+          "operation": "modify",
+          "description": "Add missing-prerequisite handling: if job role is not selected, show an English empty-state with CTA to /job-role; keep resume-required empty state; add visible error handling for resume query failures. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/LearningPlanPage.tsx",
+          "operation": "modify",
+          "description": "Prevent learning-plan dead-ends: add visible error states for plan fetch/create/mark-complete failures and provide recovery navigation (e.g., back to dashboard) without runtime crashes when the plan is null/unavailable. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/QuizPage.tsx",
+          "operation": "modify",
+          "description": "Ensure the quiz module has robust empty/error states around saving results (e.g., show a visible error message if save fails and allow retry or navigation), and provide clear CTAs to proceed to Interview/Progress after completion to avoid dead-ends. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/InterviewPage.tsx",
+          "operation": "modify",
+          "description": "Ensure the interview module handles save failures gracefully with visible error state and recovery CTA; after successful completion, add a clear CTA to proceed to /progress (instead of relying on full page reload) to keep the primary flow continuous. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/ProgressPage.tsx",
+          "operation": "modify",
+          "description": "Add robust empty and error states: if progress/quiz/interview data is missing, show clear English guidance and CTAs back to the next recommended step (e.g., learning plan, quiz, interview) rather than rendering partially broken UI. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/AsyncState.tsx",
+          "operation": "modify",
+          "description": "Enhance AsyncState to better support module resilience (e.g., optionally render richer empty/error presentations while keeping backward compatibility), so pages can consistently display loading/error/empty states with English messaging. Verify the component's usage instructions before implementing."
+        }
+      ]
+    }
+  ]
+}

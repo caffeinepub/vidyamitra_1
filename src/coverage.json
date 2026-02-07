@@ -1,0 +1,117 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-07T05:02:22.160Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 4,
+    "implemented": 4,
+    "items": [
+      {
+        "id": "REQ-14",
+        "summary": "Enforce a Sign In / Sign Up first-start experience with proper authentication gating: unauthenticated users must be redirected to the Login flow when attempting to access any protected module (Dashboard, Resume, Analysis, Domain/Job Role/Eligibility, Learning Plan, Quiz, Interview, Progress).",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/App.tsx",
+          "frontend/src/lib/routes.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/App.tsx",
+          "frontend/src/lib/routes.ts"
+        ]
+      },
+      {
+        "id": "REQ-15",
+        "summary": "Update the Register (Sign Up) UX to work correctly with Internet Identity: provide an interactive sign-up path that initiates Internet Identity (instead of disabled username/password inputs) and clearly explains that registration is completed via Internet Identity on first login.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/RegisterPage.tsx",
+          "frontend/src/pages/LoginPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/RegisterPage.tsx",
+          "frontend/src/pages/LoginPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-16",
+        "summary": "Modify the Quiz flow so it begins by asking the user how many questions they want, and then runs a quiz with exactly that many questions (no more, no fewer), including correct progress indicators and results summary based on that count.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/QuizPage.tsx",
+          "frontend/src/utils/quiz.ts",
+          "frontend/src/pages/ProgressPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/QuizPage.tsx",
+          "frontend/src/utils/quiz.ts",
+          "frontend/src/pages/ProgressPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-17",
+        "summary": "Ensure all major modules function end-to-end without dead-ends: users can complete the primary flow (auth → profile setup → resume upload → analysis → domain selection → job role selection → eligibility check → learning plan → quiz → interview → progress) with clear CTAs, robust empty states, and no runtime errors when prerequisite data is missing.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/DashboardPage.tsx",
+          "frontend/src/pages/AnalysisPage.tsx",
+          "frontend/src/pages/DomainSelectionPage.tsx",
+          "frontend/src/pages/JobRoleSelectionPage.tsx",
+          "frontend/src/pages/EligibilityCheckPage.tsx",
+          "frontend/src/pages/LearningPlanPage.tsx",
+          "frontend/src/pages/QuizPage.tsx",
+          "frontend/src/pages/InterviewPage.tsx",
+          "frontend/src/pages/ProgressPage.tsx",
+          "frontend/src/components/AsyncState.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/DashboardPage.tsx",
+          "frontend/src/pages/AnalysisPage.tsx",
+          "frontend/src/pages/DomainSelectionPage.tsx",
+          "frontend/src/pages/JobRoleSelectionPage.tsx",
+          "frontend/src/pages/EligibilityCheckPage.tsx",
+          "frontend/src/pages/LearningPlanPage.tsx",
+          "frontend/src/pages/QuizPage.tsx",
+          "frontend/src/pages/InterviewPage.tsx",
+          "frontend/src/pages/ProgressPage.tsx",
+          "frontend/src/components/AsyncState.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "backend/main.mo",
+    "build-request.json",
+    "build-template/README.md",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/App.tsx",
+    "frontend/src/backend.d.ts",
+    "frontend/src/backend.ts",
+    "frontend/src/components/AsyncState.tsx",
+    "frontend/src/declarations/backend.did.d.ts",
+    "frontend/src/declarations/backend.did.js",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/lib/routes.ts",
+    "frontend/src/pages/AnalysisPage.tsx",
+    "frontend/src/pages/DashboardPage.tsx",
+    "frontend/src/pages/DomainSelectionPage.tsx",
+    "frontend/src/pages/EligibilityCheckPage.tsx",
+    "frontend/src/pages/InterviewPage.tsx",
+    "frontend/src/pages/JobRoleSelectionPage.tsx",
+    "frontend/src/pages/LearningPlanPage.tsx",
+    "frontend/src/pages/LoginPage.tsx",
+    "frontend/src/pages/ProgressPage.tsx",
+    "frontend/src/pages/QuizPage.tsx",
+    "frontend/src/pages/RegisterPage.tsx",
+    "frontend/src/utils/quiz.ts",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

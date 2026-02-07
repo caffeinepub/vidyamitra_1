@@ -1,0 +1,98 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-enforce-a-sign-in-sign-up-first-start-experience-with-proper-authentication-gating-unauthenticated-users-must-be-redirected-to-the-login-flow-when-attempting-to-access-any-protected-module-dashboard-resume-analysis-domain-job-role-eligibility-learning-plan-quiz-interview-progress",
+      "featureTitle": "Enforce a Sign In / Sign Up first-start experience with proper authentication gating: unauthenticated users must be redirected to the Login flow when attempting to access any protected module (Dashboard, Resume, Analysis, Domain/Job Role/Eligibility, Learning Plan, Quiz, Interview, Progress).",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/lib/routes.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-14"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-update-the-register-sign-up-ux-to-work-correctly-with-internet-identity-provide-an-interactive-sign-up-path-that-initiates-internet-identity-instead-of-disabled-username-password-inputs-and-clearly-explains-that-registration-is-completed-via-internet-identity-on-first-login",
+      "featureTitle": "Update the Register (Sign Up) UX to work correctly with Internet Identity: provide an interactive sign-up path that initiates Internet Identity (instead of disabled username/password inputs) and clearly explains that registration is completed via Internet Identity on first login.",
+      "files": [
+        "frontend/src/pages/LoginPage.tsx",
+        "frontend/src/pages/RegisterPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-15"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-modify-the-quiz-flow-so-it-begins-by-asking-the-user-how-many-questions-they-want-and-then-runs-a-quiz-with-exactly-that-many-questions-no-more-no-fewer-including-correct-progress-indicators-and-results-summary-based-on-that-count",
+      "featureTitle": "Modify the Quiz flow so it begins by asking the user how many questions they want, and then runs a quiz with exactly that many questions (no more, no fewer), including correct progress indicators and results summary based on that count.",
+      "files": [
+        "frontend/src/pages/ProgressPage.tsx",
+        "frontend/src/pages/QuizPage.tsx",
+        "frontend/src/utils/quiz.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-16"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-ensure-all-major-modules-function-end-to-end-without-dead-ends-users-can-complete-the-primary-flow-auth-profile-setup-resume-upload-analysis-domain-selection-job-role-selection-eligibility-check-learning-plan-quiz-interview-progress-with-clear-ctas-robust-empty-states-and-no-runtime-errors-when-prerequisite-data-is-missing",
+      "featureTitle": "Ensure all major modules function end-to-end without dead-ends: users can complete the primary flow (auth → profile setup → resume upload → analysis → domain selection → job role selection → eligibility check → learning plan → quiz → interview → progress) with clear CTAs, robust empty states, and no runtime errors when prerequisite data is missing.",
+      "files": [
+        "frontend/src/components/AsyncState.tsx",
+        "frontend/src/pages/AnalysisPage.tsx",
+        "frontend/src/pages/DashboardPage.tsx",
+        "frontend/src/pages/DomainSelectionPage.tsx",
+        "frontend/src/pages/EligibilityCheckPage.tsx",
+        "frontend/src/pages/InterviewPage.tsx",
+        "frontend/src/pages/JobRoleSelectionPage.tsx",
+        "frontend/src/pages/LearningPlanPage.tsx",
+        "frontend/src/pages/ProgressPage.tsx",
+        "frontend/src/pages/QuizPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-17"
+      ],
+      "confidence": "high"
+    }
+  ]
+}
